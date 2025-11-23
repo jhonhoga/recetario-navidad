@@ -217,6 +217,43 @@
             }
         }
 
+        @media print {
+            body {
+                background-color: white;
+                display: block;
+            }
+            #book-container {
+                box-shadow: none;
+                max-width: 100%;
+                width: 100%;
+                min-height: auto;
+                border: none;
+            }
+            .nav-buttons {
+                display: none !important;
+            }
+            .page {
+                display: block !important;
+                opacity: 1 !important;
+                transform: none !important;
+                page-break-after: always;
+                height: auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+                border-bottom: none;
+            }
+            /* Ajustes para que la portada se vea bien impresa */
+            .cover-text {
+                border: 2px solid #333;
+                background: rgba(255,255,255,0.8);
+                color: #000;
+                text-shadow: none;
+            }
+            .cover-text h1, .cover-text h3 {
+                color: #B71C1C !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -265,6 +302,7 @@
 
             <div class="highlight-box">
                 <strong>💡 Tip de Fafa:</strong> "Cada 20 minutos baña el pollo con sus propios jugos. ¡Queda como de restaurante!"
+                <strong>Acompañantes: Pure de papas y ensalada fresca.</strong>
             </div>
         </div>
 
@@ -343,6 +381,7 @@
             <button class="nav-btn" onclick="prevPage()">Anterior</button>
             <span id="page-indicator" style="align-self: center; font-weight: bold; color: #888;">1 / 4</span>
             <button class="nav-btn" onclick="nextPage()">Siguiente</button>
+            <button class="nav-btn" onclick="window.print()" style="background-color: var(--gold); margin-left: 5px;" title="Guardar como PDF">🖨️</button>
         </div>
 
     </div>
