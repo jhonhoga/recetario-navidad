@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recetario Navideño FAFAHOME</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --christmas-red: #B71C1C;
+            --pine-green: #2E7D32;
+            --gold: #D4AF37;
+            --paper-cream: #FDFBF7;
+            --text-dark: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #2c2c2c; /* Fondo oscuro para resaltar el libro */
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Contenedor principal estilo "Libro" */
+        #book-container {
+            background-color: var(--paper-cream);
+            width: 100%;
+            max-width: 600px; /* Ancho tipo tablet/libro */
+            min-height: 90vh;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        /* Navegación */
+        .nav-buttons {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 100;
+        }
+
+        button.nav-btn {
+            background-color: var(--christmas-red);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        button.nav-btn:hover {
+            transform: scale(1.05);
+            background-color: #8a1515;
+        }
+
+        /* Páginas */
+        .page {
+            display: none; /* Ocultas por defecto */
+            padding: 40px 30px 80px 30px;
+            height: 100%;
+            animation: fadeIn 0.6s ease;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tipografía y Estilos Generales */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--christmas-red);
+        }
+
+        h2 {
+            border-bottom: 2px dashed var(--gold);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .handwritten {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--pine-green);
+        }
+
+        .highlight-box {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--gold);
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+
+        /* PAGINA 1: PORTADA */
+        #cover {
+            padding: 0;
+            position: relative;
+            text-align: center;
+            height: 100%;
+            background: #000;
+        }
+
+        .cover-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta la foto realista para llenar pantalla */
+            opacity: 0.7; /* Oscurecer un poco para que se lea el texto */
+        }
+
+        .cover-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            width: 80%;
+            border: 2px solid white;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .cover-text h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        /* PAGINA 2: POLLO */
+        .recipe-meta {
+            display: flex;
+            justify-content: space-around;
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        ul.ingredients-list {
+            list-style: none;
+        }
+        ul.ingredients-list li::before {
+            content: "🎄";
+            margin-right: 10px;
+        }
+
+        /* PAGINA 4: TABLA DE QUESOS (Estilo Infografía) */
+        .cheese-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .cheese-card {
+            border: 1px solid var(--pine-green);
+            padding: 15px;
+            border-radius: 8px;
+            background: white;
+        }
+        
+        .cheese-card h4 {
+            color: var(--pine-green);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .cheese-image-container {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            background-color: #eee; /* Color de fondo por si no carga la imagen */
+        }
+
+        .cheese-board-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 500px) {
+            .cheese-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="book-container">
+        
+        <div id="page-1" class="page active" style="padding:0;">
+            <div id="cover">
+                <img src="IMG_3375.jpg" alt="Fafahome Navidad" class="cover-img" onerror="this.src='https://images.unsplash.com/photo-1543589077-47d81606c1bf?q=80&w=1000&auto=format&fit=crop'; alert('Recuerda poner tu foto IMG_3375.jpg en la carpeta')">
+                
+                <div class="cover-text">
+                    <h1>Naviglam</h1>
+                    <h3 class="handwritten" style="color:white; font-size: 2rem;">con FAFAHOME</h3>
+                    <hr style="margin: 15px 0; border-color: white;">
+                    <p>Recetas fáciles, rápidas y deliciosas para brillar en esta Navidad.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-2" class="page">
+            <h3 class="handwritten">El plato estrella</h3>
+            <h2>Pollo Entero Navideño</h2>
+            
+            <div class="recipe-meta">
+                <span>⏱ 1h 20m</span>
+                <span>👥 6-8 Porciones</span>
+                <span>🔥 Fácil</span>
+            </div>
+
+            <h3>🛒 Lista de Compras</h3>
+            <ul class="ingredients-list">
+                <li><strong>1 Pollo entero</strong> (2-2.5kg)</li>
+                <li><strong>El Rub:</strong> 3 c/das de Mantequilla, 1 c/da de mostaza, 1 c/da de paprika, 1 c/dita de ajo/cebolla en polvo, 1 c/dita de orégano.</li>
+                <li><strong>Relleno:</strong> 1 Limón, 4 dientes de ajo, 1 ramita de romero o tomillo (opcional).</li>
+                <li><strong>Sabor:</strong> 1 taza de Caldo de pollo, 1/2 taza de Vino blanco (o jugo naranja).</li>
+                <li><strong>Dorado Final:</strong> 2 c/das de Miel.</li>
+            </ul>
+            <br>
+            <h3>👩‍🍳 Preparación</h3>
+            <ol style="margin-left: 20px; line-height: 1.6;">
+                <li><strong>Spa del pollo:</strong> Lava, seca y mete mantequilla debajo de la piel de la pechuga suavemente.</li>
+                <li><strong>Sazón:</strong> Unta la mezcla (El Rub) por todos lados. Rellena el interior del pollo con el limón y el romero.</li>
+                <li><strong>Horno:</strong> 200°C por 1h 10min con el caldo y vino blanco en una bandeja.</li>
+                <li><strong>Dorado:</strong> Pincela con miel y 1 chorrito del jugo de la bandeja los últimos 10 min.</li>
+            </ol>
+
+            <div class="highlight-box">
+                <strong>💡 Tip de Fafa:</strong> "Cada 20 minutos baña el pollo con sus propios jugos. ¡Queda como de restaurante!"
+            </div>
+        </div>
+
+        <div id="page-3" class="page">
+            <h3 class="handwritten">Salado & Dulzura</h3>
+            
+            <div style="margin-bottom: 30px;">
+                <h2 style="font-size: 1.5rem;">🥣 Dip Navideño Cremoso con Jamón y Pimentón</h2>
+                <p><em>80 gr. Queso crema + 2 c/das de Mayonesa + 2 c/das de Crema de leche + 2 c/das de Jamón picado + 1 c/da de Pimentón rojo picado, Ajo en polvo, Sal, pimienta.</em></p>
+                <p style="margin-top:10px;">Mezcla todo hasta obtener una mezcla cremosa, decora con perejil y sirve con galletas saladas, tostadas o pancitos. ¡Listo en 12 minutos! - Perfecto para Compartir</p>
+                <div class="highlight-box" style="font-size: 0.9rem; padding: 10px;">
+                    "Déjalo enfriar antes de servir para más sabor."
+                </div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #ccc; margin: 20px 0;">
+
+            <div>
+                <h2 style="font-size: 1.5rem;">🍰 Copa Tres Leches con Especias</h2>
+                <ul style="list-style: circle; margin-left: 20px;">
+                    <li>Base de ponqué o galletas María en un vasito.</li>
+                    <li>Bañar con una mezcla de Tres Leches(1 taza crema de leche, 1/2 taza de leche condensada y 1/2 taza de leche entera) + especias (1 c/dita canela, 1 chorrito de vainilla, 1 pizca de nuez moscada).</li>
+                    <li>Agrega una Capa de crema Chantilly.</li>
+                    <li>Repetir y decorar con cacao o canela y fresas.</li>
+                </ul>
+                <div class="highlight-box" style="font-size: 0.9rem; padding: 10px;">
+                    "Usa vasos transparentes para que se vea elegante y bonito."
+                </div>
+            </div>
+        </div>
+
+        <div id="page-4" class="page">
+            <h3 class="handwritten" style="text-align: center;">Extra</h3>
+            <h2 style="text-align: center;">Tabla de Quesos Perfecta</h2>
+            
+            <div class="cheese-image-container">
+                <img src="queso.png" alt="Tabla de Quesos Referencia" class="cheese-board-img">
+            </div>
+
+            <div class="cheese-grid">
+                <div class="cheese-card">
+                    <h4>1. Quesos 🧀</h4>
+                    <p><strong>Semiduro:</strong> Gouda/Edam/tilsit (150 gr.)<br>
+                    <strong>Cremoso:</strong> Brie/Camembert (1 rueda pequeña)<br>
+                    <strong>Fuerte:</strong> Azul/Roquefort/Gorgonzolá (80 gr.)</p>
+                    <strong>Untar:</strong> Queso crema o similar (100 gr.)<br>
+                    <em>Tip: Corta en cubos y triángulos variados.</em>
+                </div>
+
+                <div class="cheese-card">
+                    <h4>2. Charcutería 🍖</h4>
+                    <p>Jamón serrano, Salami o pepperoni y Pechuga de pavo o Jamón artesanal.<br>
+                    <em>Tip: Haz rositas con el salami y rollitos con el Jamón.</em></p>
+                </div>
+
+                <div class="cheese-card">
+                    <h4>3. Acompañantes 🥖</h4>
+                    <p>Galletas saladas, Baguette en rodajas, tostadas de ajo, 1/4 de taza de Nueces y Arándanos secos, pistachos opcionales.</p>
+                </div>
+
+                <div class="cheese-card">
+                    <h4>4. Decoración 🌿</h4>
+                    <p>Ramitas de Romero y arándanos frescos, estrellitas de galleta o de queso, pepinillos, Miel y Mermelada roja o de frutos rojos.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="text-align: center; margin-top: 30px;">
+                <strong>✨ Secreto de Montaje:</strong><br>
+                "No dejes espacios vacíos. Llena los huecos con frutos secos."
+            </div>
+
+            <p style="text-align: center; margin-top: 20px; font-weight: bold; color: var(--christmas-red);">¡Feliz Navidad!</p>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="prevPage()">Anterior</button>
+            <span id="page-indicator" style="align-self: center; font-weight: bold; color: #888;">1 / 4</span>
+            <button class="nav-btn" onclick="nextPage()">Siguiente</button>
+        </div>
+
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 4;
+
+        function showPage(pageNum) {
+            // Ocultar todas las páginas
+            for (let i = 1; i <= totalPages; i++) {
+                document.getElementById(`page-${i}`).classList.remove('active');
+            }
+            // Mostrar la página actual
+            document.getElementById(`page-${pageNum}`).classList.add('active');
+            
+            // Actualizar indicador
+            document.getElementById('page-indicator').innerText = `${pageNum} / ${totalPages}`;
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+    </script>
+</body>
+</html>
