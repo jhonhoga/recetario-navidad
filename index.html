@@ -380,9 +380,52 @@
             <p style="text-align: center; margin-top: 20px; font-weight: bold; color: var(--christmas-red);">¡Feliz Navidad!</p>
         </div>
 
+        <div id="page-5" class="page">
+            <h3 class="handwritten" style="text-align: center;">Extra</h3>
+            <h2 style="text-align: center;">Dip de Queso Crema con Cebollas Caramelizadas y Tocineta Frita</h2>
+            
+            <div class="cheese-image-container">
+                <img src="queso.png" alt="Dip de Queso Crema" class="cheese-board-img">
+            </div>
+
+            <h3>👩‍🍳 Preparación</h3>
+            <ol style="margin-left: 20px; line-height: 1.6; margin-bottom: 20px;">
+                <li><strong>Base:</strong> Mezclar hasta obtener una crema suave:
+                    <ul style="margin-top: 5px; margin-bottom: 10px; list-style-type: disc; margin-left: 20px;">
+                        <li>Crema de leche</li>
+                        <li>Mozzarella</li>
+                        <li>Sal y pimienta</li>
+                    </ul>
+                </li>
+                <li><strong>Relleno:</strong> Agrega la mitad de las cebollas caramelizadas y la mitad de la tocineta.</li>
+                <li><strong>Mezcla:</strong> Integra todo muy bien.</li>
+                <li><strong>Sazón:</strong> Ajusta la sazón al gusto.</li>
+            </ol>
+
+            <h3>4️⃣ Servir</h3>
+            <ul style="list-style: none; margin-left: 10px; margin-bottom: 20px;">
+                <li>• Pasa a un bowl bonito.</li>
+                <li>• Decora por encima con la otra mitad de cebolla + tocineta.</li>
+                <li>• Agrega un toque de perejil o cebollín fresco si deseas.</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>⭐ Con qué servirlo:</strong><br>
+                <ul style="list-style: none; margin-top: 10px;">
+                    <li>🍪 Galletas saladas</li>
+                    <li>🍞 Pan tostado</li>
+                    <li>🍌 Chips de yuca, plátano o papa</li>
+                    <li>🥕 Bastones de vegetales</li>
+                    <li>🥖 Mini tostadas navideñas</li>
+                </ul>
+            </div>
+
+            <p style="text-align: center; margin-top: 20px; font-weight: bold; color: var(--christmas-red);">¡Feliz Navidad!</p>
+        </div>
+
         <div class="nav-buttons">
             <button class="nav-btn" onclick="prevPage()">Anterior</button>
-            <span id="page-indicator" style="align-self: center; font-weight: bold; color: #888;">1 / 4</span>
+            <span id="page-indicator" style="align-self: center; font-weight: bold; color: #888;">1 / 5</span>
             <button id="next-btn" class="nav-btn" onclick="nextPage()">Siguiente</button>
             <button class="nav-btn" onclick="window.print()" style="background-color: var(--gold); margin-left: 5px;" title="Guardar como PDF">🖨️</button>
         </div>
@@ -391,7 +434,7 @@
 
     <script>
         let currentPage = 1;
-        const totalPages = 4;
+        const totalPages = 5;
 
         function showPage(pageNum) {
             // Ocultar todas las páginas
